@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as Updates from 'expo-updates';
+import { Button, SafeAreaView, StyleSheet, View } from 'react-native';
+import { ResizeMode, Video } from 'expo-av';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Video
+        style={styles.video}
+        source={{
+          uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode={ResizeMode.CONTAIN}
+        isLooping
+        shouldPlay
+        videoStyle={styles.video}
+      />
+      <Button
+        onPress={Updates.reloadAsync}
+        title="Reload"
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    flex: 1,
+    gap: 20,
     justifyContent: 'center',
+  },
+  video: {
+    height: 400,
+    width: '100%',
   },
 });
